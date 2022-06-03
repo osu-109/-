@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace绑定一个对应的Mapper接口-->
+<mapper namespace="com.kuang.rui.mapper.StudentMapper">
+    <!--Select查询语句-->
+    <select id="getAllStu"  resultType="com.kuang.rui.pojo.Student">
+		select stuclub.student.sid,stuclub.student.sname,stuclub.student.gender,stuclub.student.sclass,stuclub.student.cid,stuclub.club.cname
+        from stuclub.student
+        left join stuclub.club on student.cid=club.id
+	</select>
+    <!--删除学生信息-->
+    <delete id="deleteStuById">
+        delete from stuclub.student where student.sid=#{sid}
+    </delete>
+    <!--添加学生-->
+    <insert id="addStu" parameterType="com.kuang.rui.pojo.Student">
+        insert into stuclub.student (sid,sname,gender,sclass,cid)
+         values (#{sid},#{sname},#{gender},#{sclass},#{cid})
+    </insert>
+    <!--通过id查询学生信息-->
+    <select id="getStuById" resultType="com.kuang.rui.pojo.Student">
+        select stuclub.student.sid,stuclub.student.sname,stuclub.student.gender,stuclub.student.sclass,stuclub.student.cid,stuclub.club.cname
+        from stuclub.student
+        left join stuclub.club on student.cid=club.id
+        where student.cid = #{cid}
+    </select>
+    <!--修改学生信息-->
+    <update id="updateStu" parameterType="com.kuang.rui.pojo.Student">
+        update stuclub.student set sname=#{sname},
+                          gender=#{gender},
+                          sclass=#{sclass},
+                          cid=#{cid} where sid=#{sid}
+    </update>
+</mapper>

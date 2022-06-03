@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace绑定一个对应的Mapper接口-->
+<mapper namespace="com.kuang.rui.mapper.ClubMapper">
+    <!--Select查询语句-->
+    <select id="getClub"  resultType="com.kuang.rui.pojo.Club">
+		select * from stuclub.club
+	</select>
+    <select id="getClubById" resultType="com.kuang.rui.pojo.Club">
+        select * from stuclub.club where id = #{id};
+    </select>
+    <!--删除社团-->
+    <delete id="deleteClubById">
+        delete from stuclub.club where club.id=#{id}
+    </delete>
+    <!--添加社团-->
+    <insert id="addClub" parameterType="com.kuang.rui.pojo.Club">
+        insert into stuclub.club (id,cname,clubname)
+        values (#{id},#{cname},#{clubname})
+    </insert>
+<!--    更新社团信息-->
+    <update id="updateClub" parameterType="com.kuang.rui.pojo.Club">
+        update stuclub.club set cname=#{cname},
+                                   clubname=#{clubname}
+                                    where id=#{id}
+    </update>
+</mapper>
